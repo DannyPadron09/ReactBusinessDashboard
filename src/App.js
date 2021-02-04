@@ -48,6 +48,10 @@ class App extends React.Component {
               </div>
             </div>
           </Nav>
+          {/* bottom of page NavBar */}
+          <Nav className="navbar fixed-bottom nav-secondary is-dark is-light-text">
+            <Container className="text-medium">Summary</Container>
+          </Nav>
       </Container>
     );
   }
