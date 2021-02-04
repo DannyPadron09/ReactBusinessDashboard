@@ -37,6 +37,7 @@ class App extends React.Component {
 
     return (
       <Container>
+      
           {/* top of page NavBar */}
           <Nav className="nvabar navbar-expand-lg fixed-top is-white is-dark-text">
             <div className="navbar-brand h1 mb-0 text-large font-medium">
@@ -48,10 +49,14 @@ class App extends React.Component {
               </div>
             </div>
           </Nav>
+
+
           {/* bottom of page NavBar */}
           <Nav className="navbar fixed-bottom nav-secondary is-dark is-light-text">
             <Container className="text-medium">Summary</Container>
           </Nav>
+
+
       </Container>
     );
   }
