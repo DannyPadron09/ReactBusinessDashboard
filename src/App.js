@@ -110,6 +110,15 @@ class App extends Component {
               Sales Dashboard 
             </div>
             <div className="navbar-nav ml-auto">
+            
+            <div className="user-detail-section">
+              <span className="pr-2">Hi, Danny</span>
+            </div>
+            </div>
+          </Nav>
+
+          <Nav className="navbar nav-secondary">
+            <Container className="text-medium">Summary
             <Dropdown
               className="pr-2 custom-dropdown"
               options={this.state.dropdownOptions}
@@ -117,10 +126,7 @@ class App extends Component {
               value={this.state.selectedValue}
               placeholder="Select an option"
             />
-              <div className="user-detail-section">
-                <span className="pr-2">Hi, Danny</span>
-              </div>
-            </div>
+            </Container>
           </Nav>
 
           <div className="container-fluid">
@@ -133,7 +139,8 @@ class App extends Component {
                     </div>
                   </div>
                   <div className="card-value">
-                    <span>$ {this.state.amRevenue}</span>
+                    <span>$ </span>
+                    {this.state.amRevenue}
                   </div>
                 </div>
               </div>
@@ -200,9 +207,7 @@ class App extends Component {
           </div> */}
 
           {/* bottom of page NavBar */}
-          <Nav className="navbar fixed-bottom nav-secondary">
-            <Container className="text-medium">Summary</Container>
-          </Nav>
+          
 
 
       </Container>
