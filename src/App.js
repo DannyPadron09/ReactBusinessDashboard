@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import { Container, Nav } from './styled-components'
 import './App.css';
 import config from './config'
+import Dropdown from "react-dropdown";
 import FusionCharts from 'fusioncharts'
 import Charts from 'fusioncharts/fusioncharts.charts'
 import ReactFC from 'react-fusioncharts'
@@ -10,7 +11,7 @@ import ReactFC from 'react-fusioncharts'
 ReactFC.fcRoot(FusionCharts, Charts)
 
 const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values:batchGet?ranges=Sheet1&majorDimension=ROWS&key=${config.apiKey}`
-class App extends React.Component {
+class App extends Component {
   constructor() {
     super()
     this.state = {
@@ -25,16 +26,16 @@ class App extends React.Component {
 
     let purchaseRate = 0
 
-    for (let i =0; i < arrLen; i++) {
-      if (arg === arg[i]["month"]) {
-        purchaseRate += parseInt(arr[i].purchase_rate / 3)
-      }
+    // for (let i =0; i < arrLen; i++) {
+    //   if (arg === arg[i]["month"]) {
+    //     purchaseRate += parseInt(arr[i].purchase_rate / 3)
+    //   }
       
-      // setting state
-      this.setState({
-        purchaseRate: purchaseRate
-      })
-    }
+    //   // setting state
+    //   this.setState({
+    //     purchaseRate: purchaseRate
+    //   })
+    // }
 
     // kpi's
     // amazon revenue
@@ -55,8 +56,15 @@ class App extends React.Component {
     }
   }
 
+  updateDashboard = event => {
+    this.getData(event.value);
+    this.setState({ selectedValue: event.value });
+  }
+
   componentDidMount() {
-    fetch(url).then(response => response.json()).then(data => {
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
       let batchRowValues = data.valueRanges[0].values 
 
       const rows = []
@@ -70,12 +78,28 @@ class App extends React.Component {
         rows.push(rowObject)
       }
 
-      this.setState({ items: rows })
+      let dropdownOptions = []
+
+        for (let i = 0; i < rows.length; i++) {
+          dropdownOptions.push(rows[i].month)
+        }
+
+        dropdownOptions = Array.from(new Set(dropdownOptions)).reverse();
+
+        this.setState(
+          {
+            items: rows,
+            dropdownOptions: dropdownOptions,
+            selectedValue: "Jan 2019"
+          },
+          () => this.getData("Jan 2019")
+        )
   
     })
   }
 
   render () {
+    
 
     return (
       <Container>
@@ -86,6 +110,13 @@ class App extends React.Component {
               Sales Dashboard 
             </div>
             <div className="navbar-nav ml-auto">
+            <Dropdown
+              className="pr-2 custom-dropdown"
+              options={this.state.dropdownOptions}
+              onChange={this.updateDashboard}
+              value={this.state.selectedValue}
+              placeholder="Select an option"
+            />
               <div className="user-detail-section">
                 <span className="pr-2">Hi, Danny</span>
               </div>
@@ -102,8 +133,7 @@ class App extends React.Component {
                     </div>
                   </div>
                   <div className="card-value">
-                    <span>$</span>
-                    {this.state.amRevenue}
+                    <span>$ {this.state.amRevenue}</span>
                   </div>
                 </div>
               </div>
@@ -129,7 +159,7 @@ class App extends React.Component {
             </div>
           </div> */}
 
-          <div className="chart-container full-height">
+          {/* <div className="chart-container full-height">
             <ReactFC
               {...{
                 type: "doughnut2d",
@@ -157,7 +187,7 @@ class App extends React.Component {
               }
             }}
             />
-          </div>
+          </div> */}
 
 
           {/* <div className="row">
@@ -170,7 +200,7 @@ class App extends React.Component {
           </div> */}
 
           {/* bottom of page NavBar */}
-          <Nav className="navbar fixed-bottom nav-secondary is-dark is-light-text">
+          <Nav className="navbar fixed-bottom nav-secondary">
             <Container className="text-medium">Summary</Container>
           </Nav>
 
