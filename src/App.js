@@ -4,6 +4,7 @@ import './App.css';
 import config from './config'
 
 
+
 const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values:batchGet?ranges=Sheet1&majorDimension=ROWS&key=${config.apiKey}`
 class App extends React.Component {
   constructor() {
@@ -50,6 +51,52 @@ class App extends React.Component {
             </div>
           </Nav>
 
+          <div className="container-fluid">
+            <div className="row">
+              <div className="col-lg-3 col-sm-6">
+                <div className="card">
+                  <div className="card-heading">
+                    <div>
+                      Total Revenue
+                    </div>
+                  </div>
+                  <div className="card-value">
+                    <span>$</span>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div className="row">
+            <div className="col-md-4 col-lg-3">
+              {/* <!-- kpi layout as in previous step --> */}
+            </div>
+            <div className="col-md-8 col-lg-9">
+              <div className="card">
+                <div className="row">
+                  {/* <!-- row to include all mini-charts --> */}
+                  <div className="col-sm-4">
+                    <div className="chart-container">
+                      {/* <!-- chart will come here --> */}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div className="row">
+            <div className="col-md-6">
+              <div className="card">
+                <div className="chart-div"></div>
+                  {/* <!-- chart will come here --> */}
+              </div>
+            </div>
+          </div>
 
           {/* bottom of page NavBar */}
           <Nav className="navbar fixed-bottom nav-secondary is-dark is-light-text">
