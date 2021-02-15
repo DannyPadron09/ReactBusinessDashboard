@@ -19,16 +19,16 @@
   
   /* typography styles */
   .is-dark-text {
-    color: rgb(67, 68, 86);
+    color: black;
   }
   
   .is-dark-text-light {
-    color: rgb(128, 145, 171);
+    color: black;
   }
   
   .is-light-text {
     /* color: rgb(193, 204, 222); */
-    color: rgb(255, 255, 255);
+    color: black;
   }
   
   /* font weights */
@@ -103,6 +103,9 @@
     width: 40px;
   }
   
+  .container-fluid {
+      color: black;
+  }
   .grid-card {
     display: flex;
     flex-grow: 1;
@@ -166,7 +169,7 @@
   }
   
   .fab {
-    color: rgb(255, 255, 255);
+    color: black;
     opacity: 0.6;
   }
   

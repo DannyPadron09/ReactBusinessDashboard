@@ -1,9 +1,13 @@
 import React from 'react'
+import ReactDOM from 'react-dom';
 import { Container, Nav } from './styled-components'
 import './App.css';
 import config from './config'
-import ReactFC from 'react-fusioncharts';
+import FusionCharts from 'fusioncharts'
+import Charts from 'fusioncharts/fusioncharts.charts'
+import ReactFC from 'react-fusioncharts'
 
+ReactFC.fcRoot(FusionCharts, Charts)
 
 const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values:batchGet?ranges=Sheet1&majorDimension=ROWS&key=${config.apiKey}`
 class App extends React.Component {
@@ -25,11 +29,12 @@ class App extends React.Component {
       if (arg === arg[i]["month"]) {
         purchaseRate += parseInt(arr[i].purchase_rate / 3)
       }
+      
+      // setting state
+      this.setState({
+        purchaseRate: purchaseRate
+      })
     }
-
-    this.setState({
-      purchaseRate: purchaseRate
-    })
 
     // kpi's
     // amazon revenue
@@ -41,12 +46,13 @@ class App extends React.Component {
           amRevenue += parseInt(arr[i].revenue)
         }
       }
-    }
 
-    // setting state
-    this.setState({
-      amRevenue: amRevenue
-    })
+         // setting state
+      this.setState({
+        amRevenue: amRevenue
+      })
+
+    }
   }
 
   componentDidMount() {
@@ -91,7 +97,7 @@ class App extends React.Component {
               <div className="col-lg-3 col-sm-6">
                 <div className="card">
                   <div className="card-heading">
-                    <div>
+                    <div class='chartFont'>
                       Total Revenue
                     </div>
                   </div>
@@ -105,23 +111,23 @@ class App extends React.Component {
           </div>
 
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-4 col-lg-3">
-              {/* <!-- kpi layout as in previous step --> */}
+              <!-- kpi layout as in previous step -->
             </div>
             <div className="col-md-8 col-lg-9">
               <div className="card">
                 <div className="row">
-                  {/* <!-- row to include all mini-charts --> */}
+                  <!-- row to include all mini-charts -->
                   <div className="col-sm-4">
                     <div className="chart-container">
-                      {/* <!-- chart will come here --> */}
+                      <!-- chart will come here -->
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           <div className="chart-container full-height">
             <ReactFC
@@ -154,14 +160,14 @@ class App extends React.Component {
           </div>
 
 
-          <div className="row">
+          {/* <div className="row">
             <div className="col-md-6">
               <div className="card">
                 <div className="chart-div"></div>
-                  {/* <!-- chart will come here --> */}
+                  <!-- chart will come here -->
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* bottom of page NavBar */}
           <Nav className="navbar fixed-bottom nav-secondary is-dark is-light-text">
