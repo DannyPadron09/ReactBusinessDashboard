@@ -2,7 +2,7 @@ import React from 'react'
 import { Container, Nav } from './styled-components'
 import './App.css';
 import config from './config'
-
+import ReactFC from 'react-fusioncharts';
 
 
 const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values:batchGet?ranges=Sheet1&majorDimension=ROWS&key=${config.apiKey}`
@@ -12,6 +12,41 @@ class App extends React.Component {
     this.state = {
       items: []
     }
+  }
+
+  getData = arg => {
+    // google sheet data
+    const arr = this.state.items
+    const arrLen = arr.length
+
+    let purchaseRate = 0
+
+    for (let i =0; i < arrLen; i++) {
+      if (arg === arg[i]["month"]) {
+        purchaseRate += parseInt(arr[i].purchase_rate / 3)
+      }
+    }
+
+    this.setState({
+      purchaseRate: purchaseRate
+    })
+
+    // kpi's
+    // amazon revenue
+    let amRevenue = 0
+
+    for (let i = 0; i < arrLen; i++) {
+      if (arg === arr[i]["month"]) {
+        if (arr[i]["source"] === "AM") {
+          amRevenue += parseInt(arr[i].revenue)
+        }
+      }
+    }
+
+    // setting state
+    this.setState({
+      amRevenue: amRevenue
+    })
   }
 
   componentDidMount() {
@@ -62,7 +97,7 @@ class App extends React.Component {
                   </div>
                   <div className="card-value">
                     <span>$</span>
-
+                    {this.state.amRevenue}
                   </div>
                 </div>
               </div>
@@ -86,6 +121,36 @@ class App extends React.Component {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="chart-container full-height">
+            <ReactFC
+              {...{
+                type: "doughnut2d",
+                width: "100%",
+                height: "100%",
+                dataFormat: "json",
+                dataSource: {
+                  chart: {
+                    caption: "Purchase Rate",
+                    theme: "ecommerce",
+                    defaultCenterLabel: `${this.state.purchaseRate}%`,
+                    paletteColors: "#3B70C4, #000000"
+                  },
+                data: [
+                {
+                  label: "active",
+                  value: `${this.state.purchaseRate}`
+                },
+                {
+                  label: "inactive",
+                  alpha: 5,
+                  value: `${100 - this.state.purchaseRate}`
+                }
+                ]
+              }
+            }}
+            />
           </div>
 
 
