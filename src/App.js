@@ -22,7 +22,17 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      items: []
+      items: [],
+      selectedValue: null,
+      amRevenue: null,
+      ebRevenue: null,
+      etRevenue: null,
+      totalRevenue: null,
+      productViews: null,
+      purchaseRate: " ",
+      checkoutRate: " ",
+      abandonedRate: " ",
+      orderTrendStore: []
     }
   }
 
@@ -41,6 +51,12 @@ class App extends Component {
 
     let totalRevenue = 0
 
+    let productViews = 0
+    let purchaseRate= 0
+    let checkoutRate = 0
+    let abandonedRate = 0
+    let orderTrendStore = []
+
 
 
     // determines revenue for individual sources
@@ -48,21 +64,47 @@ class App extends Component {
       if (arg === arr[i]["month"]) {
         if (arr[i]["source"] === "AM") {
           amRevenue += parseInt(arr[i].revenue)
+          orderTrendStore.push({
+            label: "Amazon",
+            value: arr[i].orders,
+            displayValue: `${arr[i].orders} orders`
+          })
         }
       } else if (arr[i]["source"] === "EB") {
         ebRevenue += parseInt(arr[i].revenue)
+        orderTrendStore.push({
+          label: "Ebay",
+          value: arr[i].orders,
+          displayValue: `${arr[i].orders} orders`
+        })
       } else if (arr[i]["source"] === "ET") {
         etRevenue += parseInt(arr[i].revenue)
+        orderTrendStore.push({
+          label: "Etsy",
+          value: arr[i].orders,
+          displayValue: `${arr[i].orders} orders`
+        })
       }
+      productViews += parseInt(arr[i].product_views)
+      purchaseRate += parseInt(arr[i].purchase_rate / 3)
+      checkoutRate += parseInt(arr[i].checkout_rate / 3)
+      abandonedRate += parseInt(arr[i].abandoned_rate / 3)
 
       totalRevenue = amRevenue + ebRevenue + etRevenue
+
+      let selectedValue = arg 
 
          // setting state
       this.setState({
         amRevenue: formatNum(amRevenue),
         ebRevenue: formatNum(ebRevenue),
         etRevenue: formatNum(etRevenue),
-        totalRevenue: formatNum(totalRevenue)
+        totalRevenue: formatNum(totalRevenue),
+        productViews: formatNum(productViews),
+        purchaseRate: purchaseRate,
+        checkoutRate: checkoutRate,
+        abandonedRate: abandonedRate,
+        orderTrendStore: orderTrendStore
       })
 
     }
@@ -241,6 +283,8 @@ class App extends Component {
             }}
             />
           </div>
+
+
 
           
 
