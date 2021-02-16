@@ -145,9 +145,9 @@ class App extends Component {
           {
             items: rows,
             dropdownOptions: dropdownOptions,
-            selectedValue: "Jan 2019"
+            selectedValue: `${this.state.selectedValue}`
           },
-          () => this.getData("Jan 2019")
+          () => this.getData(`${this.state.selectedValue}`)
         )
   
     })
@@ -303,7 +303,7 @@ class App extends Component {
           </div>
 
           {/* Etsy Div Box */}
-          {/* <div className="etsy-box">
+          <div className="etsy-box">
             <div className="card">
               <div className="card-heading">
                 Etsy 
@@ -312,8 +312,43 @@ class App extends Component {
                 <span>$ </span>
                 {this.state.etRevenue}
               </div>
+              <ReactFC
+                {...{
+                  type: "doughnut2d",
+                  width: "375",
+                  height: "200",
+                  dataFormat: "json",
+                  dataSource: {
+                    chart: {
+                      caption: "Etsy",
+                      subCaption: "Purchase Rate",
+                      numberPrefix: "$",
+                      showLegend: "1",
+                      defaultCenterLabel: `${this.state.selectedValue}`,
+                      theme: "fusion"
+                    },
+                    data: [
+                      {
+                        label: "Product Views",
+                        value: `${this.state.productViews}`
+                      },
+                      {
+                        label: "Purchase Rate",
+                        value: `${this.state.purchaseRate}`
+                      },
+                      {
+                        label: "Check Out Rate",
+                        value: `${this.state.checkoutRate}`
+                      },
+                      {
+                        label: "Abandoned Rate",
+                        value: `${this.state.abandonedRate}`
+                      }
+                    ]
+                  }
+                }} />
             </div>
-          </div> */}
+          </div>
 
           {/* Total Revenue Chart Display */}
           <div className="chart-container full-height">
