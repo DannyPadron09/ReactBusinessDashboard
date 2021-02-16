@@ -4,15 +4,18 @@ import { Container, Nav } from './styled-components'
 import './App.css';
 import config from './config'
 import Dropdown from "react-dropdown";
-import FusionCharts from 'fusioncharts'
+import FusionCharts from 'fusioncharts/core'
+import Column2D from 'fusioncharts/viz/column2d'
+import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion'
 import Charts from 'fusioncharts/fusioncharts.charts'
 import ReactFC from 'react-fusioncharts'
-import "./charts-theme.js"
 import formatNum from "./format-number"
 
 
 
-ReactFC.fcRoot(FusionCharts, Charts)
+ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme)
+
+
 
 const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values:batchGet?ranges=Sheet1&majorDimension=ROWS&key=${config.apiKey}`
 class App extends Component {
@@ -65,6 +68,7 @@ class App extends Component {
     }
   }
 
+
   updateDashboard = event => {
     this.getData(event.value);
     this.setState({ selectedValue: event.value });
@@ -107,6 +111,11 @@ class App extends Component {
     })
   }
 
+  chartConfigs = () => {
+    
+  }
+
+
   render () {
     
 
@@ -126,6 +135,7 @@ class App extends Component {
             </div>
           </Nav>
 
+          {/* Dropdown month selection*/}
           <Nav className="navbar nav-secondary">
             <Container className="text-medium">Summary
             <Dropdown
@@ -138,6 +148,7 @@ class App extends Component {
             </Container>
           </Nav>
 
+          {/* Total Revenue display div box*/}
           <div className="container-fluid">
             <div className="row">
               <div className="col-lg-3 col-sm-6">
@@ -156,49 +167,31 @@ class App extends Component {
             </div>
           </div>
 
-
-          {/* <div className="row">
-            <div className="col-md-4 col-lg-3">
-              <!-- kpi layout as in previous step -->
-            </div>
-            <div className="col-md-8 col-lg-9">
-              <div className="card">
-                <div className="row">
-                  <!-- row to include all mini-charts -->
-                  <div className="col-sm-4">
-                    <div className="chart-container">
-                      <!-- chart will come here -->
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div> */}
+          {/* Total Revenue Chart Display */}
+          {}
 
           <div className="chart-container full-height">
             <ReactFC
               {...{
-                type: "doughnut2d",
+                type: "column2d",
                 width: "100%",
                 height: "100%",
                 dataFormat: "json",
                 dataSource: {
                   chart: {
                     caption: "Total Revenue",
-                    theme: "ecommerce",
+                    theme: "fusion",
                     defaultCenterLabel: `${this.state.totalRevenue}%`,
-                    paletteColors: "#3B70C4, #000000"
                   },
                 data: [
-                {
-                  label: "active",
-                  value: `${this.state.totalRevenue}`
-                },
-                {
-                  label: "inactive",
-                  alpha: 5,
-                  value: `${100 - this.state.totalRevenue}`
-                }
+                  {
+                    label: "Amazon",
+                    value: `${this.state.amRevenue}`
+                  },
+                  {
+                    label: "Total Revenue",
+                    value: `${this.state.totalRevenue}`
+                  }
                 ]
               }
             }}
