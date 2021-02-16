@@ -28,19 +28,23 @@ class App extends Component {
       ebRevenue: null,
       etRevenue: null,
       totalRevenue: null,
-      orderTrendStore: [{
+      orderTrendStoreAmazon: [{
         amProductViews: null,
         amPurchaseRate: " ",
         amCheckoutRate: " ",
-        amAbandonedRate: " ",
+        amAbandonedRate: " "
+      }],
+      orderTrendStoreEbay: [{
         ebProductViews: null,
         ebPurchaseRate: " ",
         ebCheckoutRate: " ",
-        ebAbandonedRate: " ",
+        ebAbandonedRate: " "
+      }],
+      orderTrendStoreEtsy: [{
         etProductViews: null,
         etPurchaseRate: " ",
         etCheckoutRate: " ",
-        etAbandonedRate: " ",
+        etAbandonedRate: " "
       }]
     }
   }
@@ -60,11 +64,30 @@ class App extends Component {
 
     let totalRevenue = 0
 
-    let productViews = 0
-    let purchaseRate= 0
-    let checkoutRate = 0
-    let abandonedRate = 0
-    let orderTrendStore = []
+    // let productViews = 0
+    // let purchaseRate= 0
+    // let checkoutRate = 0
+    // let abandonedRate = 0
+    let orderTrendStoreAmazon = [{
+      amProductViews: 0,
+      amPurchaseRate: 0,
+      amCheckoutRate: 0,
+      amAbandonedRate: 0
+    }]
+
+    let orderTrendStoreEbay = [{
+      ebProductViews: 0,
+      ebPurchaseRate: 0,
+      ebCheckoutRate: 0,
+      ebAbandonedRate: 0
+    }]
+
+    let orderTrendStoreEtsy = [{
+      etProductViews: 0,
+      etPurchaseRate: 0,
+      etCheckoutRate: 0,
+      etAbandonedRate: 0
+    }]
     let selectedValue = null 
 
 
@@ -74,34 +97,42 @@ class App extends Component {
       if (arg === arr[i]["month"]) {
         if (arr[i]["source"] === "AM") {
           amRevenue += parseInt(arr[i].revenue)
-          orderTrendStore.push({
+          orderTrendStoreAmazon.push({
             label: "Amazon",
             value: arr[i].orders,
             displayValue: `${arr[i].orders}`,
-            amProductViews: `${arr[i].productViews}`,
-            amPurchaseRate: `${arr[i].purchaseRate}`,
-            amCheckoutRate: `${arr[i].checkoutRate}`,
-            amAbandonedRate: `${arr[i].abandonedRate}`
+            amProductViews: `${arr[i].product_views}`,
+            amPurchaseRate: `${arr[i].purchase_rate}`,
+            amCheckoutRate: `${arr[i].checkout_rate}`,
+            amAbandonedRate: `${arr[i].abandoned_rate}`
           })
         } else if (arr[i]["source"] === "EB") {
         ebRevenue += parseInt(arr[i].revenue)
-        orderTrendStore.push({
+        orderTrendStoreEbay.push({
           label: "Ebay",
           value: arr[i].orders,
-          displayValue: `${arr[i].orders} orders`
+          displayValue: `${arr[i].orders}`,
+          ebProductViews: `${arr[i].product_views}`,
+          ebPurchaseRate: `${arr[i].purchase_rate}`,
+          ebCheckoutRate: `${arr[i].checkout_rate}`,
+          ebAbandonedRate: `${arr[i].abandoned_rate}`
         })
       } else if (arr[i]["source"] === "ET") {
         etRevenue += parseInt(arr[i].revenue)
-        orderTrendStore.push({
+        orderTrendStoreEtsy.push({
           label: "Etsy",
           value: arr[i].orders,
-          displayValue: `${arr[i].orders} orders`
+          displayValue: `${arr[i].orders}`
         })
       }
-      orderTrendStore.amProductViews = arr[i].product_views
-      orderTrendStore.amPurchaseRate = arr[i].purchase_rate
-      orderTrendStore.amCheckoutRate = arr[i].checkout_rate
-      orderTrendStore.amAbandonedRate = arr[i].abandoned_rate
+      orderTrendStoreAmazon.amProductViews = arr[i].product_views
+      orderTrendStoreAmazon.amPurchaseRate = arr[i].purchase_rate
+      orderTrendStoreAmazon.amCheckoutRate = arr[i].checkout_rate
+      orderTrendStoreAmazon.amAbandonedRate = arr[i].abandoned_rate
+      orderTrendStoreEbay.ebProductViews = arr[i].product_views
+      orderTrendStoreEbay.ebPurchaseRate = arr[i].purchase_rate
+      orderTrendStoreEbay.ebCheckoutRate = arr[i].checkout_rate
+      orderTrendStoreEbay.ebAbandonedRate = arr[i].abandoned_rate
       // productViews += parseInt(arr[i].product_views)
       // purchaseRate += parseInt(arr[i].purchase_rate / 3)
       // checkoutRate += parseInt(arr[i].checkout_rate / 3)
@@ -119,11 +150,13 @@ class App extends Component {
         ebRevenue: formatNum(ebRevenue),
         etRevenue: formatNum(etRevenue),
         totalRevenue: formatNum(totalRevenue),
-        productViews: formatNum(productViews),
-        purchaseRate: purchaseRate,
-        checkoutRate: checkoutRate,
-        abandonedRate: abandonedRate,
-        orderTrendStore: orderTrendStore,
+        // productViews: formatNum(productViews),
+        // purchaseRate: purchaseRate,
+        // checkoutRate: checkoutRate,
+        // abandonedRate: abandonedRate,
+        orderTrendStoreAmazon: orderTrendStoreAmazon,
+        orderTrendStoreEbay: orderTrendStoreEbay,
+        orderTrendStoreEtsy: orderTrendStoreEtsy,
         selectedValue: selectedValue
       })
     }
@@ -263,19 +296,19 @@ class App extends Component {
                     data: [
                       {
                         label: "Product Views",
-                        value: `${this.state.orderTrendStore.amProductViews}`
+                        value: `${this.state.orderTrendStoreAmazon.amProductViews}`
                       },
                       {
                         label: "Purchase Rate",
-                        value: `${this.state.orderTrendStore.amPurchaseRate}`
+                        value: `${this.state.orderTrendStoreAmazon.amPurchaseRate}`
                       },
                       {
                         label: "Check Out Rate",
-                        value: `${this.state.orderTrendStore.amCheckoutRate}`
+                        value: `${this.state.orderTrendStoreAmazon.amCheckoutRate}`
                       },
                       {
                         label: "Abandoned Rate",
-                        value: `${this.state.orderTrendStore.amAbandonedRate}`
+                        value: `${this.state.orderTrendStoreAmazon.amAbandonedRate}`
                       }
                     ]
                   }
@@ -322,19 +355,19 @@ class App extends Component {
                     data: [
                       {
                         label: "Product Views",
-                        value: `${this.state.productViews}`
+                        value: `${this.state.orderTrendStoreEbay.ebProductViews}`
                       },
                       {
                         label: "Purchase Rate",
-                        value: `${this.state.purchaseRate}`
+                        value: `${this.state.orderTrendStoreEbay.ebPurchaseRate}`
                       },
                       {
                         label: "Check Out Rate",
-                        value: `${this.state.checkoutRate}`
+                        value: `${this.state.orderTrendStoreEbay.ebCheckoutRate}`
                       },
                       {
                         label: "Abandoned Rate",
-                        value: `${this.state.abandonedRate}`
+                        value: `${this.state.orderTrendStoreEbay.ebAbandonedRate}`
                       }
                     ]
                   }
