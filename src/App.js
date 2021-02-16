@@ -39,6 +39,8 @@ class App extends Component {
     let totalRevenue = 0
 
 
+
+    // determines revenue for individual sources
     for (let i = 0; i < arrLen; i++) {
       if (arg === arr[i]["month"]) {
         if (arr[i]["source"] === "AM") {
@@ -50,9 +52,14 @@ class App extends Component {
         etRevenue += parseInt(arr[i].revenue)
       }
 
+      totalRevenue = amRevenue + ebRevenue + etRevenue
+
          // setting state
       this.setState({
-        amRevenue: formatNum(amRevenue)
+        amRevenue: formatNum(amRevenue),
+        ebRevenue: formatNum(ebRevenue),
+        etRevenue: formatNum(etRevenue),
+        totalRevenue: formatNum(totalRevenue)
       })
 
     }
@@ -92,9 +99,9 @@ class App extends Component {
           {
             items: rows,
             dropdownOptions: dropdownOptions,
-            selectedValue: "Jan 2019"
+            selectedValue: this.state.selectedValue
           },
-          () => this.getData("Jan 2019")
+          () => this.getData(this.state.selectedValue)
         )
   
     })
@@ -142,7 +149,7 @@ class App extends Component {
                   </div>
                   <div className="card-value">
                     <span>$ </span>
-                    {this.state.amRevenue}
+                    {this.state.totalRevenue}
                   </div>
                 </div>
               </div>
@@ -168,7 +175,7 @@ class App extends Component {
             </div>
           </div> */}
 
-          {/* <div className="chart-container full-height">
+          <div className="chart-container full-height">
             <ReactFC
               {...{
                 type: "doughnut2d",
@@ -177,26 +184,26 @@ class App extends Component {
                 dataFormat: "json",
                 dataSource: {
                   chart: {
-                    caption: "Purchase Rate",
+                    caption: "Total Revenue",
                     theme: "ecommerce",
-                    defaultCenterLabel: `${this.state.purchaseRate}%`,
+                    defaultCenterLabel: `${this.state.totalRevenue}%`,
                     paletteColors: "#3B70C4, #000000"
                   },
                 data: [
                 {
                   label: "active",
-                  value: `${this.state.purchaseRate}`
+                  value: `${this.state.totalRevenue}`
                 },
                 {
                   label: "inactive",
                   alpha: 5,
-                  value: `${100 - this.state.purchaseRate}`
+                  value: `${100 - this.state.totalRevenue}`
                 }
                 ]
               }
             }}
             />
-          </div> */}
+          </div>
 
 
           {/* <div className="row">
