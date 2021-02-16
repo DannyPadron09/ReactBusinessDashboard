@@ -28,11 +28,20 @@ class App extends Component {
       ebRevenue: null,
       etRevenue: null,
       totalRevenue: null,
-      productViews: null,
-      purchaseRate: " ",
-      checkoutRate: " ",
-      abandonedRate: " ",
-      orderTrendStore: []
+      orderTrendStore: [{
+        amProductViews: null,
+        amPurchaseRate: " ",
+        amCheckoutRate: " ",
+        amAbandonedRate: " ",
+        ebProductViews: null,
+        ebPurchaseRate: " ",
+        ebCheckoutRate: " ",
+        ebAbandonedRate: " ",
+        etProductViews: null,
+        etPurchaseRate: " ",
+        etCheckoutRate: " ",
+        etAbandonedRate: " ",
+      }]
     }
   }
 
@@ -68,7 +77,11 @@ class App extends Component {
           orderTrendStore.push({
             label: "Amazon",
             value: arr[i].orders,
-            displayValue: `${arr[i].orders} orders`
+            displayValue: `${arr[i].orders}`,
+            amProductViews: `${arr[i].productViews}`,
+            amPurchaseRate: `${arr[i].purchaseRate}`,
+            amCheckoutRate: `${arr[i].checkoutRate}`,
+            amAbandonedRate: `${arr[i].abandonedRate}`
           })
         } else if (arr[i]["source"] === "EB") {
         ebRevenue += parseInt(arr[i].revenue)
@@ -85,10 +98,14 @@ class App extends Component {
           displayValue: `${arr[i].orders} orders`
         })
       }
-      productViews += parseInt(arr[i].product_views)
-      purchaseRate += parseInt(arr[i].purchase_rate / 3)
-      checkoutRate += parseInt(arr[i].checkout_rate / 3)
-      abandonedRate += parseInt(arr[i].abandoned_rate / 3)
+      orderTrendStore.amProductViews = arr[i].product_views
+      orderTrendStore.amPurchaseRate = arr[i].purchase_rate
+      orderTrendStore.amCheckoutRate = arr[i].checkout_rate
+      orderTrendStore.amAbandonedRate = arr[i].abandoned_rate
+      // productViews += parseInt(arr[i].product_views)
+      // purchaseRate += parseInt(arr[i].purchase_rate / 3)
+      // checkoutRate += parseInt(arr[i].checkout_rate / 3)
+      // abandonedRate += parseInt(arr[i].abandoned_rate / 3)
     }
   }
 
@@ -246,19 +263,19 @@ class App extends Component {
                     data: [
                       {
                         label: "Product Views",
-                        value: `${this.state.productViews}`
+                        value: `${this.state.orderTrendStore.amProductViews}`
                       },
                       {
                         label: "Purchase Rate",
-                        value: `${this.state.purchaseRate}`
+                        value: `${this.state.orderTrendStore.amPurchaseRate}`
                       },
                       {
                         label: "Check Out Rate",
-                        value: `${this.state.checkoutRate}`
+                        value: `${this.state.orderTrendStore.amCheckoutRate}`
                       },
                       {
                         label: "Abandoned Rate",
-                        value: `${this.state.abandonedRate}`
+                        value: `${this.state.orderTrendStore.amAbandonedRate}`
                       }
                     ]
                   }
