@@ -195,6 +195,19 @@ class App extends Component {
             </div>
           </div>
 
+          {/* Etsy Div Box */}
+          <div className="etsy-box">
+            <div className="card">
+              <div className="card-heading">
+                Etsy 
+              </div>
+              <div className="card-value">
+                <span>$ </span>
+                {this.state.etRevenue}
+              </div>
+            </div>
+          </div>
+
           {/* Total Revenue Chart Display */}
           <div className="chart-container full-height">
             <ReactFC

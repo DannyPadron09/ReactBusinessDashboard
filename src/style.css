@@ -97,6 +97,14 @@
     position: absolute;
     right: -20px;
   }
+
+  div.etsy-box {
+    width: 15%;
+    margin-top: 80px;
+    color: black;
+    position: absolute;
+    right: -20px;
+  }
   
 
   /* navbar styles */
