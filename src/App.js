@@ -12,6 +12,7 @@ import formatNum from "./format-number"
 
 
 
+
 ReactFC.fcRoot(FusionCharts, Column2D, Doughnut2D, FusionTheme)
 
 
@@ -210,7 +211,7 @@ class App extends Component {
           <div className="amazon-box">
             <div className="card">
               <div className="card-heading">
-                Amazon 
+                Total Revenue
               </div>
               <div className="card-value">
                 <span>$ </span>
@@ -225,6 +226,17 @@ class App extends Component {
                   dataSource: {
                     chart: {
                       caption: "Amazon",
+                      usePlotGradientColor: "0",
+                      showAlternateVGridColor: "0",
+                      chartLeftMargin: "5",
+                      canvasLeftMargin: "5",
+                      divLineAlpha: "10",
+                      divLineColor: "#000000",
+                      captionFontColor: "#8091ab",
+                      valuePadding: "5",
+                      plotToolText: "<div>$label<br><b>$value orders</b>",
+                      captionAlignment: "left",
+                      captionPadding: "20",
                       subCaption: "Purchase Rate",
                       numberPrefix: "$",
                       showLegend: "1",
@@ -258,7 +270,7 @@ class App extends Component {
           <div className="ebay-box">
             <div className="card">
               <div className="card-heading">
-                Ebay 
+                Total Revenue 
               </div>
               <div className="card-value">
                 <span>$ </span>
@@ -273,6 +285,17 @@ class App extends Component {
                   dataSource: {
                     chart: {
                       caption: "Ebay",
+                      usePlotGradientColor: "0",
+                      showAlternateVGridColor: "0",
+                      chartLeftMargin: "5",
+                      canvasLeftMargin: "5",
+                      divLineAlpha: "10",
+                      divLineColor: "#000000",
+                      captionFontColor: "#8091ab",
+                      valuePadding: "5",
+                      plotToolText: "<div>$label<br><b>$value orders</b>",
+                      captionAlignment: "left",
+                      captionPadding: "20",
                       subCaption: "Purchase Rate",
                       numberPrefix: "$",
                       showLegend: "1",
@@ -306,7 +329,7 @@ class App extends Component {
           <div className="etsy-box">
             <div className="card">
               <div className="card-heading">
-                Etsy 
+                Total Revenue 
               </div>
               <div className="card-value">
                 <span>$ </span>
@@ -321,6 +344,17 @@ class App extends Component {
                   dataSource: {
                     chart: {
                       caption: "Etsy",
+                      usePlotGradientColor: "0",
+                      showAlternateVGridColor: "0",
+                      chartLeftMargin: "5",
+                      canvasLeftMargin: "5",
+                      divLineAlpha: "10",
+                      divLineColor: "#000000",
+                      captionFontColor: "#8091ab",
+                      valuePadding: "5",
+                      plotToolText: "<div>$label<br><b>$value orders</b>",
+                      captionAlignment: "left",
+                      captionPadding: "20",
                       subCaption: "Purchase Rate",
                       numberPrefix: "$",
                       showLegend: "1",
