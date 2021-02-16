@@ -91,11 +91,11 @@
   }
 
   div.ebay-box {
-    width: 15%;
-    margin-top: 20px;
+    width: 20%;
+    margin-top: 225px;
     color: black;
     position: absolute;
-    right: -20px;
+    right: 40px;
   }
 
   div.etsy-box {

@@ -69,8 +69,7 @@ class App extends Component {
             value: arr[i].orders,
             displayValue: `${arr[i].orders} orders`
           })
-        }
-      } else if (arr[i]["source"] === "EB") {
+        } else if (arr[i]["source"] === "EB") {
         ebRevenue += parseInt(arr[i].revenue)
         orderTrendStore.push({
           label: "Ebay",
@@ -89,6 +88,8 @@ class App extends Component {
       purchaseRate += parseInt(arr[i].purchase_rate / 3)
       checkoutRate += parseInt(arr[i].checkout_rate / 3)
       abandonedRate += parseInt(arr[i].abandoned_rate / 3)
+    }
+  }
 
       totalRevenue = amRevenue + ebRevenue + etRevenue
 
@@ -108,7 +109,6 @@ class App extends Component {
         selectedValue: selectedValue
       })
     }
-  }
 
 
   updateDashboard = event => {
@@ -255,7 +255,7 @@ class App extends Component {
           </div>
 
           {/* Ebay Div Box */}
-          {/* <div className="ebay-box">
+          <div className="ebay-box">
             <div className="card">
               <div className="card-heading">
                 Ebay 
@@ -264,8 +264,43 @@ class App extends Component {
                 <span>$ </span>
                 {this.state.ebRevenue}
               </div>
+              <ReactFC
+                {...{
+                  type: "doughnut2d",
+                  width: "375",
+                  height: "200",
+                  dataFormat: "json",
+                  dataSource: {
+                    chart: {
+                      caption: "Ebay",
+                      subCaption: "Purchase Rate",
+                      numberPrefix: "$",
+                      showLegend: "1",
+                      defaultCenterLabel: `${this.state.selectedValue}`,
+                      theme: "fusion"
+                    },
+                    data: [
+                      {
+                        label: "Product Views",
+                        value: `${this.state.productViews}`
+                      },
+                      {
+                        label: "Purchase Rate",
+                        value: `${this.state.purchaseRate}`
+                      },
+                      {
+                        label: "Check Out Rate",
+                        value: `${this.state.checkoutRate}`
+                      },
+                      {
+                        label: "Abandoned Rate",
+                        value: `${this.state.abandonedRate}`
+                      }
+                    ]
+                  }
+                }} />
             </div>
-          </div> */}
+          </div>
 
           {/* Etsy Div Box */}
           {/* <div className="etsy-box">
