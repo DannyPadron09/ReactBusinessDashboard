@@ -90,7 +90,13 @@
     right: -20px;
   }
 
-  
+  div.ebay-box {
+    width: 15%;
+    margin-top: 20px;
+    color: black;
+    position: absolute;
+    right: -20px;
+  }
   
 
   /* navbar styles */

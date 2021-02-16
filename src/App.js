@@ -168,6 +168,8 @@ class App extends Component {
           </div>
 
           {/*Individual Online Store Div Boxes */}
+
+          {/* Amazon Div Box */}
           <div className="amazon-box">
             <div className="card">
               <div className="card-heading">
@@ -176,6 +178,19 @@ class App extends Component {
               <div className="card-value">
                 <span>$ </span>
                 {this.state.amRevenue}
+              </div>
+            </div>
+          </div>
+
+          {/* Ebay Div Box */}
+          <div className="ebay-box">
+            <div className="card">
+              <div className="card-heading">
+                Ebay 
+              </div>
+              <div className="card-value">
+                <span>$ </span>
+                {this.state.ebRevenue}
               </div>
             </div>
           </div>
