@@ -219,7 +219,7 @@ class App extends Component {
               <ReactFC
                 {...{
                   type: "doughnut2d",
-                  width: "375",
+                  width: "400",
                   height: "200",
                   dataFormat: "json",
                   dataSource: {
@@ -267,7 +267,7 @@ class App extends Component {
               <ReactFC
                 {...{
                   type: "doughnut2d",
-                  width: "375",
+                  width: "400",
                   height: "200",
                   dataFormat: "json",
                   dataSource: {
@@ -315,7 +315,7 @@ class App extends Component {
               <ReactFC
                 {...{
                   type: "doughnut2d",
-                  width: "375",
+                  width: "400",
                   height: "200",
                   dataFormat: "json",
                   dataSource: {
