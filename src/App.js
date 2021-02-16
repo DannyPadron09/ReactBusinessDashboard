@@ -7,6 +7,10 @@ import Dropdown from "react-dropdown";
 import FusionCharts from 'fusioncharts'
 import Charts from 'fusioncharts/fusioncharts.charts'
 import ReactFC from 'react-fusioncharts'
+import "./charts-theme.js"
+import formatNum from "./format-number"
+
+
 
 ReactFC.fcRoot(FusionCharts, Charts)
 
@@ -24,33 +28,31 @@ class App extends Component {
     const arr = this.state.items
     const arrLen = arr.length
 
-    let purchaseRate = 0
-
-    // for (let i =0; i < arrLen; i++) {
-    //   if (arg === arg[i]["month"]) {
-    //     purchaseRate += parseInt(arr[i].purchase_rate / 3)
-    //   }
-      
-    //   // setting state
-    //   this.setState({
-    //     purchaseRate: purchaseRate
-    //   })
-    // }
-
     // kpi's
     // amazon revenue
     let amRevenue = 0
+    // ebay revenue
+    let ebRevenue = 0
+    // etsy Revenue
+    let etRevenue = 0
+
+    let totalRevenue = 0
+
 
     for (let i = 0; i < arrLen; i++) {
       if (arg === arr[i]["month"]) {
         if (arr[i]["source"] === "AM") {
           amRevenue += parseInt(arr[i].revenue)
         }
+      } else if (arr[i]["source"] === "EB") {
+        ebRevenue += parseInt(arr[i].revenue)
+      } else if (arr[i]["source"] === "ET") {
+        etRevenue += parseInt(arr[i].revenue)
       }
 
          // setting state
       this.setState({
-        amRevenue: amRevenue
+        amRevenue: formatNum(amRevenue)
       })
 
     }
@@ -205,8 +207,6 @@ class App extends Component {
               </div>
             </div>
           </div> */}
-
-          {/* bottom of page NavBar */}
           
 
 
