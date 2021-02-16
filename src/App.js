@@ -1,19 +1,18 @@
 import React, { Component } from 'react'
 import ReactDOM from 'react-dom';
 import { Container, Nav } from './styled-components'
-import './App.css';
 import config from './config'
 import Dropdown from "react-dropdown";
 import FusionCharts from 'fusioncharts/core'
 import Column2D from 'fusioncharts/viz/column2d'
+import Doughnut2D from 'fusioncharts/viz/doughnut2d'
 import FusionTheme from 'fusioncharts/themes/fusioncharts.theme.fusion'
-import Charts from 'fusioncharts/fusioncharts.charts'
 import ReactFC from 'react-fusioncharts'
 import formatNum from "./format-number"
 
 
 
-ReactFC.fcRoot(FusionCharts, Column2D, FusionTheme)
+ReactFC.fcRoot(FusionCharts, Column2D, Doughnut2D, FusionTheme)
 
 
 
@@ -56,6 +55,7 @@ class App extends Component {
     let checkoutRate = 0
     let abandonedRate = 0
     let orderTrendStore = []
+    let selectedValue = null 
 
 
 
@@ -92,7 +92,7 @@ class App extends Component {
 
       totalRevenue = amRevenue + ebRevenue + etRevenue
 
-      let selectedValue = arg 
+      selectedValue = arg 
 
          // setting state
       this.setState({
@@ -104,9 +104,9 @@ class App extends Component {
         purchaseRate: purchaseRate,
         checkoutRate: checkoutRate,
         abandonedRate: abandonedRate,
-        orderTrendStore: orderTrendStore
+        orderTrendStore: orderTrendStore,
+        selectedValue: selectedValue
       })
-
     }
   }
 
@@ -145,18 +145,13 @@ class App extends Component {
           {
             items: rows,
             dropdownOptions: dropdownOptions,
-            selectedValue: this.state.selectedValue
+            selectedValue: "Jan 2019"
           },
-          () => this.getData(this.state.selectedValue)
+          () => this.getData("Jan 2019")
         )
   
     })
   }
-
-  chartConfigs = () => {
-    
-  }
-
 
   render () {
     
@@ -221,11 +216,46 @@ class App extends Component {
                 <span>$ </span>
                 {this.state.amRevenue}
               </div>
+              <ReactFC
+                {...{
+                  type: "doughnut2d",
+                  width: "375",
+                  height: "200",
+                  dataFormat: "json",
+                  dataSource: {
+                    chart: {
+                      caption: "Amazon",
+                      subCaption: "Purchase Rate",
+                      numberPrefix: "$",
+                      showLegend: "1",
+                      defaultCenterLabel: `${this.state.selectedValue}`,
+                      theme: "fusion"
+                    },
+                    data: [
+                      {
+                        label: "Product Views",
+                        value: `${this.state.productViews}`
+                      },
+                      {
+                        label: "Purchase Rate",
+                        value: `${this.state.purchaseRate}`
+                      },
+                      {
+                        label: "Check Out Rate",
+                        value: `${this.state.checkoutRate}`
+                      },
+                      {
+                        label: "Abandoned Rate",
+                        value: `${this.state.abandonedRate}`
+                      }
+                    ]
+                  }
+                }} />
             </div>
           </div>
 
           {/* Ebay Div Box */}
-          <div className="ebay-box">
+          {/* <div className="ebay-box">
             <div className="card">
               <div className="card-heading">
                 Ebay 
@@ -235,10 +265,10 @@ class App extends Component {
                 {this.state.ebRevenue}
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Etsy Div Box */}
-          <div className="etsy-box">
+          {/* <div className="etsy-box">
             <div className="card">
               <div className="card-heading">
                 Etsy 
@@ -248,7 +278,7 @@ class App extends Component {
                 {this.state.etRevenue}
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Total Revenue Chart Display */}
           <div className="chart-container full-height">

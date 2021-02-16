@@ -83,11 +83,11 @@
   }
 
   div.amazon-box {
-    width: 15%;
+    width: 20%;
     margin-top: -40px;
     color: black;
     position: absolute;
-    right: -20px;
+    right: 40px;
   }
 
   div.ebay-box {
