@@ -168,20 +168,18 @@ class App extends Component {
           </div>
 
           {/* Total Revenue Chart Display */}
-          {}
-
           <div className="chart-container full-height">
             <ReactFC
               {...{
                 type: "column2d",
-                width: "100%",
-                height: "100%",
+                width: "700",
+                height: "400",
                 dataFormat: "json",
                 dataSource: {
                   chart: {
                     caption: "Total Revenue",
                     theme: "fusion",
-                    defaultCenterLabel: `${this.state.totalRevenue}%`,
+                    defaultCenterLabel: `${this.state.selectedValue}`,
                   },
                 data: [
                   {
@@ -189,15 +187,34 @@ class App extends Component {
                     value: `${this.state.amRevenue}`
                   },
                   {
-                    label: "Total Revenue",
-                    value: `${this.state.totalRevenue}`
-                  }
+                    label: "Ebay",
+                    value: `${this.state.ebRevenue}`
+                  },
+                  {
+                    label: "Etsy",
+                    value: `${this.state.etRevenue}`
+                  },
+                  
                 ]
               }
             }}
             />
           </div>
 
+          {/*Individual Online Store Div Boxes */}
+          <div className="amazon-box">
+            <div className="card">
+              <div className="card-heading">
+                <div class="chartFont">
+                  Amazon 
+                </div>
+              </div>
+              <div className="card-value">
+                <span>$ </span>
+                {this.state.amRevenue}
+              </div>
+            </div>
+          </div>
 
           {/* <div className="row">
             <div className="col-md-6">
