@@ -81,6 +81,16 @@
   .container-fluid {
     width: 95% !important;
   }
+
+  div.amazon-box {
+    width: 15%;
+    margin-top: -40px;
+    color: black;
+    position: absolute;
+    right: -20px;
+  }
+
+  
   
 
   /* navbar styles */
@@ -159,9 +169,6 @@
     min-height: 30px;
   }
   
-  .is-card-dark {
-    background: rgb(32, 42, 59) !important;
-  }
   
   .logo-adjust {
     margin-top: -4px;

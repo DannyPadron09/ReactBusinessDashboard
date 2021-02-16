@@ -167,6 +167,19 @@ class App extends Component {
             </div>
           </div>
 
+          {/*Individual Online Store Div Boxes */}
+          <div className="amazon-box">
+            <div className="card">
+              <div className="card-heading">
+                Amazon 
+              </div>
+              <div className="card-value">
+                <span>$ </span>
+                {this.state.amRevenue}
+              </div>
+            </div>
+          </div>
+
           {/* Total Revenue Chart Display */}
           <div className="chart-container full-height">
             <ReactFC
@@ -201,20 +214,7 @@ class App extends Component {
             />
           </div>
 
-          {/*Individual Online Store Div Boxes */}
-          <div className="amazon-box">
-            <div className="card">
-              <div className="card-heading">
-                <div class="chartFont">
-                  Amazon 
-                </div>
-              </div>
-              <div className="card-value">
-                <span>$ </span>
-                {this.state.amRevenue}
-              </div>
-            </div>
-          </div>
+          
 
           {/* <div className="row">
             <div className="col-md-6">
