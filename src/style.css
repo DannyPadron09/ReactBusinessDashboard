@@ -98,6 +98,14 @@
     right: 40px;
   }
 
+  div.abandoned-rate-box {
+    width: 25%;
+    margin-top: 225px;
+    color: black;
+    position: absolute;
+    right: 530px;
+  }
+
   div.amazon-box {
     width: 25%;
     margin-top: -40px;
@@ -108,7 +116,7 @@
 
   div.ebay-box {
     width: 25%;
-    margin-top: 225px;
+    margin-top: 20px;
     color: black;
     position: absolute;
     right: 40px;
@@ -116,10 +124,10 @@
 
   div.etsy-box {
     width: 25%;
-    margin-top: 225px;
+    margin-top: 80px;
     color: black;
     position: absolute;
-    right: 530px;
+    right: 40px;
   }
   
 

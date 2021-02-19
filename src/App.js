@@ -208,6 +208,7 @@ class App extends Component {
 
           {/* Store Revenue Boxes */}
 
+          {/* Amazon Revenue Box */}
           <div className="amazon-box">
             <div className="card">
               <div className="card-heading">
@@ -219,7 +220,33 @@ class App extends Component {
             </div>
           </div>
 
-          {/* Amazon Div Box */}
+          {/* Ebay Revenue Box */}
+
+          <div className="ebay-box">
+            <div className="card">
+              <div className="card-heading">
+                Revenue from Ebay 
+              </div>
+              <div className="card-value">
+                <span>$ {this.state.ebRevenue} </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Etsy Revenue Box */}
+
+          <div className="etsy-box">
+            <div className="card">
+              <div className="card-heading">
+                Revenue from Etsy 
+              </div>
+              <div className="card-value">
+                <span>$ {this.state.etRevenue} </span>
+              </div>
+            </div>
+          </div>
+
+          {/* Purchase Rate Box */}
           <div className="purchase-rate-box">
             <div className="card">
               <div className="card-heading">
@@ -258,7 +285,7 @@ class App extends Component {
             </div>
           </div>
 
-          {/* Ebay Div Box */}
+          {/* Checkout Rate Box */}
           <div className="checkout-rate-box">
             <div className="card">
               <div className="card-heading">
@@ -296,8 +323,8 @@ class App extends Component {
             </div>
           </div>
 
-          {/* Etsy Div Box */}
-          <div className="etsy-box">
+          {/* Abandoned Rate Box */}
+          <div className="abandoned-rate-box">
             <div className="card">
               <div className="card-heading">
               </div>
