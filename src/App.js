@@ -206,65 +206,21 @@ class App extends Component {
 
           {/*Individual Online Store Div Boxes */}
 
-          {/* Doughnut Chart Div Box */}
-          <div className="doughnut-box">
+          {/* Store Revenue Boxes */}
+
+          <div className="amazon-box">
             <div className="card">
               <div className="card-heading">
-                {`${this.state.selectedValue}`}
+                Revenue from Amazon 
               </div>
               <div className="card-value">
-              <ReactFC
-                {...{
-                  type: "doughnut2d",
-                  width: "400",
-                  height: "200",
-                  dataFormat: "json",
-                  dataSource: {
-                    chart: {
-                      caption: "Purchase Trends",
-                      usePlotGradientColor: "0",
-                      showAlternateVGridColor: "0",
-                      chartLeftMargin: "5",
-                      canvasLeftMargin: "5",
-                      divLineAlpha: "10",
-                      divLineColor: "#000000",
-                      captionFontColor: "#8091ab",
-                      valuePadding: "5",
-                      plotToolText: "<div>$label<br><b>$value orders</b>",
-                      captionAlignment: "left",
-                      captionPadding: "20",
-                      subCaption: "Purchase Rate",
-                      numberPrefix: "$",
-                      showLegend: "1",
-                      defaultCenterLabel: `${this.state.selectedValue}`,
-                      theme: "fusion"
-                    },
-                    data: [
-                      {
-                        label: "Product Views",
-                        value: `${this.state.productViews}`
-                      },
-                      {
-                        label: "Purchase Rate",
-                        value: `${this.state.purchaseRate}`
-                      },
-                      {
-                        label: "Check Out Rate",
-                        value: `${this.state.checkoutRate}`
-                      },
-                      {
-                        label: "Abandoned Rate",
-                        value: `${this.state.abandonedRate}`
-                      }
-                    ]
-                  }
-                }} />
+                <span>$ {this.state.amRevenue} </span>
               </div>
             </div>
           </div>
 
           {/* Amazon Div Box */}
-          <div className="amazon-box">
+          <div className="purchase-rate-box">
             <div className="card">
               <div className="card-heading">
               </div>
@@ -303,7 +259,7 @@ class App extends Component {
           </div>
 
           {/* Ebay Div Box */}
-          <div className="ebay-box">
+          <div className="checkout-rate-box">
             <div className="card">
               <div className="card-heading">
               </div>
@@ -399,21 +355,6 @@ class App extends Component {
                     }}
                   />
           </div>
-
-
-
-          
-
-          {/* <div className="row">
-            <div className="col-md-6">
-              <div className="card">
-                <div className="chart-div"></div>
-                  <!-- chart will come here -->
-              </div>
-            </div>
-          </div> */}
-          
-
 
       </Container>
     );

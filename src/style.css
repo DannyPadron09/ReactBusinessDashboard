@@ -82,12 +82,20 @@
     width: 95% !important;
   }
 
-  div.doughnut-box {
+  div.purchase-rate-box {
     width: 25%;
     margin-top: -40px;
     color: black;
     position: absolute;
     right: 530px;
+  }
+
+  div.checkout-rate-box {
+    width: 25%;
+    margin-top: 225px;
+    color: black;
+    position: absolute;
+    right: 40px;
   }
 
   div.amazon-box {
