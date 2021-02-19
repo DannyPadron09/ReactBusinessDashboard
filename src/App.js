@@ -11,10 +11,7 @@ import ReactFC from 'react-fusioncharts'
 import formatNum from "./format-number"
 
 
-
-
 ReactFC.fcRoot(FusionCharts, Column2D, Doughnut2D, FusionTheme)
-
 
 
 const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheetId}/values:batchGet?ranges=Sheet1&majorDimension=ROWS&key=${config.apiKey}`
@@ -204,7 +201,7 @@ class App extends Component {
             </div>
           </div>
 
-          {/*Individual Online Store Div Boxes */}
+          {/*Individual Div Boxes */}
 
           {/* Store Revenue Boxes */}
 
@@ -281,7 +278,6 @@ class App extends Component {
                         }}
                       />
               </div>
-              
             </div>
           </div>
 
@@ -361,7 +357,7 @@ class App extends Component {
             </div>
           </div>
 
-          {/* Total Revenue Chart Display */}
+          {/* Orders Trend Chart */}
           <div className="chart-container full-height">
           <ReactFC
                     {...{
@@ -382,7 +378,7 @@ class App extends Component {
                     }}
                   />
           </div>
-
+          
       </Container>
     );
   }
