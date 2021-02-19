@@ -82,6 +82,14 @@
     width: 95% !important;
   }
 
+  div.doughnut-box {
+    width: 25%;
+    margin-top: -40px;
+    color: black;
+    position: absolute;
+    right: 530px;
+  }
+
   div.amazon-box {
     width: 25%;
     margin-top: -40px;

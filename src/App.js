@@ -28,24 +28,11 @@ class App extends Component {
       ebRevenue: null,
       etRevenue: null,
       totalRevenue: null,
-      orderTrendStoreAmazon: [{
-        amProductViews: null,
-        amPurchaseRate: " ",
-        amCheckoutRate: " ",
-        amAbandonedRate: " "
-      }],
-      orderTrendStoreEbay: [{
-        ebProductViews: null,
-        ebPurchaseRate: " ",
-        ebCheckoutRate: " ",
-        ebAbandonedRate: " "
-      }],
-      orderTrendStoreEtsy: [{
-        etProductViews: null,
-        etPurchaseRate: " ",
-        etCheckoutRate: " ",
-        etAbandonedRate: " "
-      }]
+      productViews: null,
+      purchaseRate: " ",
+      checkoutRate: " ",
+      abandonedRate: " ",
+      ordersTrendStore: []
     }
   }
 
@@ -63,31 +50,11 @@ class App extends Component {
     let etRevenue = 0
 
     let totalRevenue = 0
-
-    // let productViews = 0
-    // let purchaseRate= 0
-    // let checkoutRate = 0
-    // let abandonedRate = 0
-    let orderTrendStoreAmazon = [{
-      amProductViews: 0,
-      amPurchaseRate: 0,
-      amCheckoutRate: 0,
-      amAbandonedRate: 0
-    }]
-
-    let orderTrendStoreEbay = [{
-      ebProductViews: 0,
-      ebPurchaseRate: 0,
-      ebCheckoutRate: 0,
-      ebAbandonedRate: 0
-    }]
-
-    let orderTrendStoreEtsy = [{
-      etProductViews: 0,
-      etPurchaseRate: 0,
-      etCheckoutRate: 0,
-      etAbandonedRate: 0
-    }]
+    let productViews = 0
+    let purchaseRate= 0
+    let checkoutRate = 0
+    let abandonedRate = 0
+    let ordersTrendStore = []
     let selectedValue = null 
 
 
@@ -97,46 +64,30 @@ class App extends Component {
       if (arg === arr[i]["month"]) {
         if (arr[i]["source"] === "AM") {
           amRevenue += parseInt(arr[i].revenue)
-          orderTrendStoreAmazon.push({
+          ordersTrendStore.push({
             label: "Amazon",
             value: arr[i].orders,
             displayValue: `${arr[i].orders}`,
-            amProductViews: `${arr[i].product_views}`,
-            amPurchaseRate: `${arr[i].purchase_rate}`,
-            amCheckoutRate: `${arr[i].checkout_rate}`,
-            amAbandonedRate: `${arr[i].abandoned_rate}`
           })
         } else if (arr[i]["source"] === "EB") {
         ebRevenue += parseInt(arr[i].revenue)
-        orderTrendStoreEbay.push({
+        ordersTrendStore.push({
           label: "Ebay",
           value: arr[i].orders,
           displayValue: `${arr[i].orders}`,
-          ebProductViews: `${arr[i].product_views}`,
-          ebPurchaseRate: `${arr[i].purchase_rate}`,
-          ebCheckoutRate: `${arr[i].checkout_rate}`,
-          ebAbandonedRate: `${arr[i].abandoned_rate}`
         })
       } else if (arr[i]["source"] === "ET") {
         etRevenue += parseInt(arr[i].revenue)
-        orderTrendStoreEtsy.push({
+        ordersTrendStore.push({
           label: "Etsy",
           value: arr[i].orders,
           displayValue: `${arr[i].orders}`
         })
       }
-      orderTrendStoreAmazon.amProductViews = arr[i].product_views
-      orderTrendStoreAmazon.amPurchaseRate = arr[i].purchase_rate
-      orderTrendStoreAmazon.amCheckoutRate = arr[i].checkout_rate
-      orderTrendStoreAmazon.amAbandonedRate = arr[i].abandoned_rate
-      orderTrendStoreEbay.ebProductViews = arr[i].product_views
-      orderTrendStoreEbay.ebPurchaseRate = arr[i].purchase_rate
-      orderTrendStoreEbay.ebCheckoutRate = arr[i].checkout_rate
-      orderTrendStoreEbay.ebAbandonedRate = arr[i].abandoned_rate
-      // productViews += parseInt(arr[i].product_views)
-      // purchaseRate += parseInt(arr[i].purchase_rate / 3)
-      // checkoutRate += parseInt(arr[i].checkout_rate / 3)
-      // abandonedRate += parseInt(arr[i].abandoned_rate / 3)
+      productViews += parseInt(arr[i].product_views)
+      purchaseRate += parseInt(arr[i].purchase_rate / 3)
+      checkoutRate += parseInt(arr[i].checkout_rate / 3)
+      abandonedRate += parseInt(arr[i].abandoned_rate / 3)
     }
   }
 
@@ -150,13 +101,11 @@ class App extends Component {
         ebRevenue: formatNum(ebRevenue),
         etRevenue: formatNum(etRevenue),
         totalRevenue: formatNum(totalRevenue),
-        // productViews: formatNum(productViews),
-        // purchaseRate: purchaseRate,
-        // checkoutRate: checkoutRate,
-        // abandonedRate: abandonedRate,
-        orderTrendStoreAmazon: orderTrendStoreAmazon,
-        orderTrendStoreEbay: orderTrendStoreEbay,
-        orderTrendStoreEtsy: orderTrendStoreEtsy,
+        productViews: formatNum(productViews),
+        purchaseRate: purchaseRate,
+        checkoutRate: checkoutRate,
+        abandonedRate: abandonedRate,
+        ordersTrendStore: ordersTrendStore,
         selectedValue: selectedValue
       })
     }
@@ -196,9 +145,9 @@ class App extends Component {
           {
             items: rows,
             dropdownOptions: dropdownOptions,
-            selectedValue: `${this.state.selectedValue}`
+            selectedValue: "Jan 2019"
           },
-          () => this.getData(`${this.state.selectedValue}`)
+          () => this.getData("Jan 2019")
         )
   
     })
@@ -257,16 +206,13 @@ class App extends Component {
 
           {/*Individual Online Store Div Boxes */}
 
-          {/* Amazon Div Box */}
-          <div className="amazon-box">
+          {/* Doughnut Chart Div Box */}
+          <div className="doughnut-box">
             <div className="card">
               <div className="card-heading">
-                Total Revenue
+                {`${this.state.selectedValue}`}
               </div>
               <div className="card-value">
-                <span>$ </span>
-                {this.state.amRevenue}
-              </div>
               <ReactFC
                 {...{
                   type: "doughnut2d",
@@ -275,125 +221,7 @@ class App extends Component {
                   dataFormat: "json",
                   dataSource: {
                     chart: {
-                      caption: "Amazon",
-                      usePlotGradientColor: "0",
-                      showAlternateVGridColor: "0",
-                      chartLeftMargin: "5",
-                      canvasLeftMargin: "5",
-                      divLineAlpha: "10",
-                      divLineColor: "#000000",
-                      captionFontColor: "#8091ab",
-                      valuePadding: "5",
-                      plotToolText: "<div>$label<br><b>$value orders</b>",
-                      captionAlignment: "left",
-                      captionPadding: "20",
-                      subCaption: "Purchase Rate",
-                      numberPrefix: "$",
-                      showLegend: "1",
-                      defaultCenterLabel: `${this.state.selectedValue}`,
-                      theme: "fusion"
-                    },
-                    data: [
-                      {
-                        label: "Product Views",
-                        value: `${this.state.orderTrendStoreAmazon.amProductViews}`
-                      },
-                      {
-                        label: "Purchase Rate",
-                        value: `${this.state.orderTrendStoreAmazon.amPurchaseRate}`
-                      },
-                      {
-                        label: "Check Out Rate",
-                        value: `${this.state.orderTrendStoreAmazon.amCheckoutRate}`
-                      },
-                      {
-                        label: "Abandoned Rate",
-                        value: `${this.state.orderTrendStoreAmazon.amAbandonedRate}`
-                      }
-                    ]
-                  }
-                }} />
-            </div>
-          </div>
-
-          {/* Ebay Div Box */}
-          <div className="ebay-box">
-            <div className="card">
-              <div className="card-heading">
-                Total Revenue 
-              </div>
-              <div className="card-value">
-                <span>$ </span>
-                {this.state.ebRevenue}
-              </div>
-              <ReactFC
-                {...{
-                  type: "doughnut2d",
-                  width: "400",
-                  height: "200",
-                  dataFormat: "json",
-                  dataSource: {
-                    chart: {
-                      caption: "Ebay",
-                      usePlotGradientColor: "0",
-                      showAlternateVGridColor: "0",
-                      chartLeftMargin: "5",
-                      canvasLeftMargin: "5",
-                      divLineAlpha: "10",
-                      divLineColor: "#000000",
-                      captionFontColor: "#8091ab",
-                      valuePadding: "5",
-                      plotToolText: "<div>$label<br><b>$value orders</b>",
-                      captionAlignment: "left",
-                      captionPadding: "20",
-                      subCaption: "Purchase Rate",
-                      numberPrefix: "$",
-                      showLegend: "1",
-                      defaultCenterLabel: `${this.state.selectedValue}`,
-                      theme: "fusion"
-                    },
-                    data: [
-                      {
-                        label: "Product Views",
-                        value: `${this.state.orderTrendStoreEbay.ebProductViews}`
-                      },
-                      {
-                        label: "Purchase Rate",
-                        value: `${this.state.orderTrendStoreEbay.ebPurchaseRate}`
-                      },
-                      {
-                        label: "Check Out Rate",
-                        value: `${this.state.orderTrendStoreEbay.ebCheckoutRate}`
-                      },
-                      {
-                        label: "Abandoned Rate",
-                        value: `${this.state.orderTrendStoreEbay.ebAbandonedRate}`
-                      }
-                    ]
-                  }
-                }} />
-            </div>
-          </div>
-
-          {/* Etsy Div Box */}
-          <div className="etsy-box">
-            <div className="card">
-              <div className="card-heading">
-                Total Revenue 
-              </div>
-              <div className="card-value">
-                <span>$ </span>
-                {this.state.etRevenue}
-              </div>
-              <ReactFC
-                {...{
-                  type: "doughnut2d",
-                  width: "400",
-                  height: "200",
-                  dataFormat: "json",
-                  dataSource: {
-                    chart: {
-                      caption: "Etsy",
+                      caption: "Purchase Trends",
                       usePlotGradientColor: "0",
                       showAlternateVGridColor: "0",
                       chartLeftMargin: "5",
@@ -431,6 +259,122 @@ class App extends Component {
                     ]
                   }
                 }} />
+              </div>
+            </div>
+          </div>
+
+          {/* Amazon Div Box */}
+          <div className="amazon-box">
+            <div className="card">
+              <div className="card-heading">
+              </div>
+              <div className="card-value">
+                <ReactFC
+                        {...{
+                          type: "doughnut2d",
+                          width: "400",
+                          height: "200",
+                          dataFormat: "json",
+                          containerBackgroundOpacity: "0",
+                          dataSource: {
+                            chart: {
+                              caption: "Purchase Rate",
+                              theme: "fusion",
+                              defaultCenterLabel: `${this.state.purchaseRate}%`,
+                              paletteColors: "#3B70C4, #000000"
+                            },
+                            data: [
+                              {
+                                label: "active",
+                                value: `${this.state.purchaseRate}`
+                              },
+                              {
+                                label: "inactive",
+                                alpha: 5,
+                                value: `${100 - this.state.purchaseRate}`
+                              }
+                            ]
+                          }
+                        }}
+                      />
+              </div>
+              
+            </div>
+          </div>
+
+          {/* Ebay Div Box */}
+          <div className="ebay-box">
+            <div className="card">
+              <div className="card-heading">
+              </div>
+              <div className="card-value">
+              <ReactFC
+                        {...{
+                          type: "doughnut2d",
+                          width: "400",
+                          height: "200",
+                          dataFormat: "json",
+                          containerBackgroundOpacity: "0",
+                          dataSource: {
+                            chart: {
+                              caption: "Checkout Rate",
+                              theme: "fusion",
+                              defaultCenterLabel: `${this.state.checkoutRate}%`,
+                              paletteColors: "#3B70C4, #000000"
+                            },
+                            data: [
+                              {
+                                label: "active",
+                                value: `${this.state.checkoutRate}`
+                              },
+                              {
+                                label: "inactive",
+                                alpha: 5,
+                                value: `${100 - this.state.checkoutRate}`
+                              }
+                            ]
+                          }
+                        }}
+                      />
+              </div>
+            </div>
+          </div>
+
+          {/* Etsy Div Box */}
+          <div className="etsy-box">
+            <div className="card">
+              <div className="card-heading">
+              </div>
+              <div className="card-value">
+              <ReactFC
+                        {...{
+                          type: "doughnut2d",
+                          width: "400",
+                          height: "200",
+                          dataFormat: "json",
+                          containerBackgroundOpacity: "0",
+                          dataSource: {
+                            chart: {
+                              caption: "Abandoned Cart Rate",
+                              theme: "fusion",
+                              defaultCenterLabel: `${this.state.abandonedRate}%`,
+                              paletteColors: "#3B70C4, #000000"
+                            },
+                            data: [
+                              {
+                                label: "active",
+                                value: `${this.state.abandonedRate}`
+                              },
+                              {
+                                label: "inactive",
+                                alpha: 5,
+                                value: `${100 - this.state.abandonedRate}`
+                              }
+                            ]
+                          }
+                        }}
+                      />
+              </div>
             </div>
           </div>
 
