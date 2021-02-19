@@ -380,36 +380,24 @@ class App extends Component {
 
           {/* Total Revenue Chart Display */}
           <div className="chart-container full-height">
-            <ReactFC
-              {...{
-                type: "column2d",
-                width: "700",
-                height: "400",
-                dataFormat: "json",
-                dataSource: {
-                  chart: {
-                    caption: "Total Revenue",
-                    theme: "fusion",
-                    defaultCenterLabel: `${this.state.selectedValue}`,
-                  },
-                data: [
-                  {
-                    label: "Amazon",
-                    value: `${this.state.amRevenue}`
-                  },
-                  {
-                    label: "Ebay",
-                    value: `${this.state.ebRevenue}`
-                  },
-                  {
-                    label: "Etsy",
-                    value: `${this.state.etRevenue}`
-                  },
-                  
-                ]
-              }
-            }}
-            />
+          <ReactFC
+                    {...{
+                      type: "column2d",
+                      width: "700",
+                      height: "400",
+                      dataFormat: "json",
+                      containerBackgroundOpacity: "0",
+                      dataEmptyMessage: "Loading Data...",
+                      dataSource: {
+                        chart: {
+                          theme: "fusion",
+                          caption: "Orders Trend",
+                          subCaption: "By Stores"
+                        },
+                        data: this.state.ordersTrendStore
+                      }
+                    }}
+                  />
           </div>
 
 
