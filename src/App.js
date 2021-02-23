@@ -243,6 +243,19 @@ class App extends Component {
             </div>
           </div>
 
+          {/* Product Views Box */}
+
+          <div className="product-views-box">
+            <div className="card">
+              <div className="card-heading">
+                Total Product views for {this.state.selectedValue}
+              </div>
+              <div className="card-value">
+                {this.state.productViews}
+              </div>
+            </div>
+          </div>
+
           {/* Purchase Rate Box */}
           <div className="purchase-rate-box">
             <div className="card">

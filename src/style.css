@@ -106,6 +106,14 @@
     right: 530px;
   }
 
+  div.product-views-box {
+    width: 25%;
+    margin-top: 140px;
+    color: black;
+    position: absolute;
+    right: 40px;
+  }
+
   div.amazon-box {
     width: 25%;
     margin-top: -40px;
